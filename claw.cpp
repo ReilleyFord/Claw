@@ -34,25 +34,25 @@ int main() {
 // Getting user input
     string input = getInput("Input Directory: ");
     if(!fs::exists(input)) {
-      cout << "Error: That directory doesn't exist" << endl;
+      output("Error: That directory doesn't exist");
       continue;
     }
     do {
       string path = getInput("Path: ");
-
-// Calling findPath, passing input directory and query
-       cPath = findPath(input, path);
-        if(!fs::exists(cPath)) {
-          output("Error: That directory doesn't exist");
-          continue;
-        }
+      cPath = findPath(input, path);
+      if(!fs::exists(cPath)) {
+        output("Error: That directory doesn't exist");
+        continue;
+      }
     } while(!fs::exists(cPath));
 
-      string outDir = getInput("Output Directory: ");
+    string outDir = getInput("Output Directory: ");
 
 // Copying
-    string output = "Copying " + cPath.filename() + " (this may take awhile) ..."
-    ouput(output);
+    string outputStr = "Copying ";
+    outputStr += cPath.filename();
+    outputStr += " (this may take awhile) ...";
+    output(outputStr);
     fs::copy(cPath, outDir);
     output("Copying complete!");
 
